@@ -1,6 +1,8 @@
 /**
  * Vue métier de l'énergie.
  */
+import { EnergyCard } from '../cards/EnergyCard.js';
+
 export class EnergyView {
   /**
    * Crée une instance de la vue énergie.
@@ -29,6 +31,9 @@ export class EnergyView {
     title.textContent = 'Energy';
     const content = document.createElement('p');
     content.textContent = this.data.energy || 'Synthèse énergie';
+
+    const energy = new EnergyCard({ title: 'Énergie', value: 'stable', status: 'READY', consumption: '3.2 kWh', production: '1.1 kWh', trend: 'stable' });
+    container.appendChild(energy.render());
     container.appendChild(title);
     container.appendChild(content);
     return container;

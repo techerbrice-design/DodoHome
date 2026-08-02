@@ -1,5 +1,10 @@
 import { SmartCard } from './SmartCard.js';
 import { DemoDataProvider } from './mock/DemoDataProvider.js';
+import { LightCard } from './cards/LightCard.js';
+import { ClimateCard } from './cards/ClimateCard.js';
+import { SecurityCard } from './cards/SecurityCard.js';
+import { EnergyCard } from './cards/EnergyCard.js';
+import { PresenceCard } from './cards/PresenceCard.js';
 
 /**
  * Modèle de vue pour transformer les données API en structure de synthèse adaptée au dashboard.
@@ -56,11 +61,11 @@ export class DashboardViewModel {
     ];
 
     const smartCards = [
-      new SmartCard({ id: 'lighting', type: 'LIGHTING', title: 'Carte Lumière', value: 'Structure', status: 'READY', metadata: { category: 'LIGHTING' } }),
-      new SmartCard({ id: 'climate', type: 'CLIMATE', title: 'Carte Température', value: 'Structure', status: 'READY', metadata: { category: 'CLIMATE' } }),
-      new SmartCard({ id: 'security', type: 'SECURITY', title: 'Carte Sécurité', value: 'Structure', status: 'READY', metadata: { category: 'SECURITY' } }),
-      new SmartCard({ id: 'energy', type: 'ENERGY', title: 'Carte Énergie', value: 'Structure', status: 'READY', metadata: { category: 'ENERGY' } }),
-      new SmartCard({ id: 'presence', type: 'PRESENCE', title: 'Carte Présence', value: 'Structure', status: 'READY', metadata: { category: 'PRESENCE' } }),
+      new LightCard({ id: 'lighting', title: 'Éclairage', value: 'ON', status: 'READY', metadata: { lights: 5, intensity: 72 } }),
+      new ClimateCard({ id: 'climate', title: 'Climat', value: 'Stable', status: 'READY', temperature: '21°C', target: '22°C', trend: 'stable' }),
+      new SecurityCard({ id: 'security', title: 'Sécurité', value: 'ARMED', status: 'READY', presence: 'Présence détectée', alerts: ['Aucune'] }),
+      new EnergyCard({ id: 'energy', title: 'Énergie', value: 'stable', status: 'READY', consumption: '3.2 kWh', production: '1.1 kWh', trend: 'stable' }),
+      new PresenceCard({ id: 'presence', title: 'Présence', value: 'Actif', status: 'READY', persons: 2, zones: 'Salon, Cuisine', lastActivity: 'Il y a 5 min' }),
     ];
 
     cards.push(...smartCards.map((card) => ({
