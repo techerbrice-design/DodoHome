@@ -1,0 +1,53 @@
+{
+  "home": {
+    "id": "dodo_home",
+    "name": "Dodo Home"
+  },
+  "floors": [
+    {
+      "id": "ground_floor",
+      "name": "Rez-de-chaussée",
+      "level": 0,
+      "rooms": [
+        "Entrée",
+        "Salon",
+        "Cuisine",
+        "Cellier",
+        "Salle de bain",
+        "Dressing",
+        "WC",
+        "Débarras",
+        "Garage"
+      ]
+    },
+    {
+      "id": "upper_floor",
+      "name": "Étage",
+      "level": 1,
+      "rooms": [
+        "Chambre parentale",
+        "Chambre Maxence",
+        "Chambre Bureau",
+        "Chambre Amis",
+        "Pallier",
+        "Salle de bain"
+      ]
+    },
+    {
+      "id": "exterior",
+      "name": "Extérieur",
+      "level": 2,
+      "rooms": [
+        "Terrasse",
+        "Portail"
+      ]
+    }
+  ],
+  "zones": [
+    "extérieur",
+    "jour",
+    "nuit",
+    "sécurité"
+  ],
+  "scenes": []
+}
