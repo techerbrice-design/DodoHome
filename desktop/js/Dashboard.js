@@ -4,6 +4,7 @@
 import { DashboardViewModel } from './DashboardViewModel.js';
 import { HomeDashboardView } from './HomeDashboardView.js';
 import { ViewRouter } from './ViewRouter.js';
+import { DashboardRenderer } from './DashboardRenderer.js';
 
 export class Dashboard {
   /**
@@ -20,6 +21,7 @@ export class Dashboard {
     this.viewModel = new DashboardViewModel();
     this.view = new HomeDashboardView();
     this.viewRouter = new ViewRouter();
+    this.renderer = new DashboardRenderer();
     this.initializeViews();
   }
 
@@ -44,7 +46,10 @@ export class Dashboard {
     const dashboard = document.createElement('main');
     dashboard.className = 'dashboard';
     dashboard.dataset.currentView = this.viewRouter.getCurrentView();
-    this.view.setData(this.data && this.data.data ? this.data.data : this.data);
+    const payload = this.data && this.data.data ? this.data.data : this.data;
+    this.renderer.setData(payload);
+    this.renderer.setView(this.viewRouter.getCurrentView());
+    this.view.setData(payload);
     const rendered = this.view.render();
     dashboard.appendChild(rendered);
     return dashboard;
@@ -67,7 +72,9 @@ export class Dashboard {
    * @returns {string}
    */
   navigate(viewId = '') {
-    return this.viewRouter.navigate(viewId);
+    const view = this.viewRouter.navigate(viewId);
+    this.renderer.setView(view);
+    return view;
   }
 
   /**
