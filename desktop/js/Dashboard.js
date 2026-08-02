@@ -11,6 +11,8 @@ export class Dashboard {
   constructor(options = {}) {
     this.store = options.store;
     this.router = options.router;
+    this.data = {};
+    this.status = 'OFFLINE';
   }
 
   /**
@@ -24,6 +26,15 @@ export class Dashboard {
     title.textContent = 'Bienvenue dans Dodo Home';
     dashboard.appendChild(title);
     return dashboard;
+  }
+
+  /**
+   * Définit les données issues du connecteur.
+   * @param {object} [data={}] Données retournées par l'API.
+   */
+  setData(data = {}) {
+    this.data = data || {};
+    this.status = data && data.status ? data.status : 'OFFLINE';
   }
 }
 
