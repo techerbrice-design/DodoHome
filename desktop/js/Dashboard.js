@@ -1,6 +1,8 @@
 /**
  * Composant de page d'accueil vide pour l'interface desktop.
  */
+import { DashboardViewModel } from './DashboardViewModel.js';
+
 export class Dashboard {
   /**
    * Crée le tableau de bord.
@@ -13,6 +15,7 @@ export class Dashboard {
     this.router = options.router;
     this.data = {};
     this.status = 'OFFLINE';
+    this.viewModel = new DashboardViewModel();
   }
 
   /**
@@ -35,6 +38,7 @@ export class Dashboard {
   setData(data = {}) {
     this.data = data || {};
     this.status = data && data.status ? data.status : 'OFFLINE';
+    this.viewModel = new DashboardViewModel({ data: data && data.data ? data.data : data });
   }
 }
 
