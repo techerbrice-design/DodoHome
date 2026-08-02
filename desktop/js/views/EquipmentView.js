@@ -5,6 +5,8 @@ import { LightCard } from '../cards/LightCard.js';
 import { ClimateCard } from '../cards/ClimateCard.js';
 import { SecurityCard } from '../cards/SecurityCard.js';
 import { EnergyCard } from '../cards/EnergyCard.js';
+import { EquipmentRegistry } from '../equipment/EquipmentRegistry.js';
+import { EquipmentCategoryView } from '../equipment/EquipmentCategoryView.js';
 
 export class EquipmentView {
   /**
@@ -13,6 +15,7 @@ export class EquipmentView {
    */
   constructor(data = {}) {
     this.data = data || {};
+    this.registry = new EquipmentRegistry();
   }
 
   /**
@@ -42,6 +45,19 @@ export class EquipmentView {
 
     [light, climate, security, energy].forEach((card) => {
       container.appendChild(card.render());
+    });
+
+    const equipmentData = Array.isArray(this.data.equipmentItems) ? this.data.equipmentItems : [];
+    equipmentData.forEach((item) => this.registry.register(item));
+
+    const categories = ['LIGHTING', 'CLIMATE', 'SECURITY', 'ENERGY', 'SHUTTER', 'OTHER'];
+    categories.forEach((category) => {
+      const items = this.registry.getByCategory(category);
+      if (items.length) {
+        const categoryView = new EquipmentCategoryView(category);
+        categoryView.setEquipments(items);
+        container.appendChild(categoryView.render());
+      }
     });
 
     container.appendChild(title);
