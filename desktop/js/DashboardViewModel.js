@@ -1,4 +1,5 @@
 import { SmartCard } from './SmartCard.js';
+import { DemoDataProvider } from './mock/DemoDataProvider.js';
 
 /**
  * Modèle de vue pour transformer les données API en structure de synthèse adaptée au dashboard.
@@ -11,6 +12,7 @@ export class DashboardViewModel {
    */
   constructor(options = {}) {
     this.data = options.data || {};
+    this.demoProvider = new DemoDataProvider();
   }
 
   /**
@@ -18,12 +20,13 @@ export class DashboardViewModel {
    * @returns {{cards: Array<object>, widgets: Array<object>, summary: object}}
    */
   build() {
-    const system = this.data.system || {};
-    const rooms = Array.isArray(this.data.rooms) ? this.data.rooms : [];
-    const equipment = Array.isArray(this.data.equipment) ? this.data.equipment : [];
-    const scenes = Array.isArray(this.data.scenes) ? this.data.scenes : [];
+    const demoData = this.demoProvider.getAllData();
+    const system = this.data.system || demoData.houseStatus || {};
+    const rooms = Array.isArray(this.data.rooms) ? this.data.rooms : (Array.isArray(demoData.rooms) ? demoData.rooms : []);
+    const equipment = Array.isArray(this.data.equipment) ? this.data.equipment : (Array.isArray(demoData.equipment) ? demoData.equipment : []);
+    const scenes = Array.isArray(this.data.scenes) ? this.data.scenes : (Array.isArray(demoData.scenes) ? demoData.scenes : []);
     const events = Array.isArray(this.data.events) ? this.data.events : [];
-    const history = this.data.history || {};
+    const history = this.data.history || (Array.isArray(demoData.history) ? { timeline: demoData.history } : {});
 
     const cards = [
       {
