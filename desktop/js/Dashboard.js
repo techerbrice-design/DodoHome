@@ -2,6 +2,7 @@
  * Composant de page d'accueil vide pour l'interface desktop.
  */
 import { DashboardViewModel } from './DashboardViewModel.js';
+import { HomeDashboardView } from './HomeDashboardView.js';
 
 export class Dashboard {
   /**
@@ -16,6 +17,7 @@ export class Dashboard {
     this.data = {};
     this.status = 'OFFLINE';
     this.viewModel = new DashboardViewModel();
+    this.view = new HomeDashboardView();
   }
 
   /**
@@ -25,9 +27,9 @@ export class Dashboard {
   render() {
     const dashboard = document.createElement('main');
     dashboard.className = 'dashboard';
-    const title = document.createElement('h1');
-    title.textContent = 'Bienvenue dans Dodo Home';
-    dashboard.appendChild(title);
+    this.view.setData(this.data && this.data.data ? this.data.data : this.data);
+    const rendered = this.view.render();
+    dashboard.appendChild(rendered);
     return dashboard;
   }
 
@@ -39,6 +41,7 @@ export class Dashboard {
     this.data = data || {};
     this.status = data && data.status ? data.status : 'OFFLINE';
     this.viewModel = new DashboardViewModel({ data: data && data.data ? data.data : data });
+    this.view.setData(data && data.data ? data.data : data);
   }
 }
 
