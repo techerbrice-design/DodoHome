@@ -1,0 +1,26 @@
+/*
+ * Variables graphiques du thème premium DodoHome.
+ * Définit les couleurs, les rayons, les ombres et les transitions.
+ */
+:root {
+  --color-primary: #0f172a;
+  --color-primary-2: #1e293b;
+  --color-accent: #3b82f6;
+  --color-accent-2: #60a5fa;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-background: #f4f7fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-text: #111827;
+  --color-text-muted: #64748b;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+  --transition-fast: 150ms ease;
+  --transition-default: 220ms ease;
+}
