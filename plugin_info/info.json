@@ -1,0 +1,13 @@
+{
+  "id": "DodoHome",
+  "name": "DodoHome",
+  "version": "0.0.1",
+  "require": "4.4",
+  "category": "automation",
+  "author": "DodoHome",
+  "documentation": "https://jeedom.github.io/documentation/",
+  "mobile": "integration",
+  "hasDependency": false,
+  "language": ["fr_FR", "en_US"],
+  "compatibility": ["miniplus", "smart", "rpi", "docker", "diy", "v4"]
+}

@@ -1,0 +1,19 @@
+# PHP
+/vendor/
+/composer.lock
+
+# Node.js
+/node_modules/
+/npm-debug.log*
+/package-lock.json
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Tests and coverage
+/coverage/
+/.phpunit.result.cache
