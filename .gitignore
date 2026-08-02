@@ -17,3 +17,6 @@ Thumbs.db
 # Tests and coverage
 /coverage/
 /.phpunit.result.cache
+
+# Local Jeedom configuration
+/config/local.config.json

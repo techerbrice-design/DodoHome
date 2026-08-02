@@ -1,0 +1,7 @@
+{
+  "jeedom": {
+    "url": "",
+    "apiKey": "",
+    "timeout": 5000
+  }
+}
