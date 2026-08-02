@@ -6,6 +6,8 @@ import { Card } from './Card.js';
 import { Widget } from './Widget.js';
 import { Header } from './Header.js';
 import { StatusBar } from './StatusBar.js';
+import { SmartCard } from './SmartCard.js';
+import { DashboardLayout } from './DashboardLayout.js';
 
 export class HomeDashboardView {
   /**
@@ -55,11 +57,26 @@ export class HomeDashboardView {
     const summary = this.data.summary || {};
     const cards = this.buildCards(summary);
     const widgets = this.buildWidgets(summary);
+    const smartCards = this.buildSmartCards(summary);
+
+    const layout = new DashboardLayout();
+    const homeZone = layout.addZone({ id: 'home-status', title: 'HOME STATUS', description: 'État global, santé et connexion', type: 'home' });
+    const roomsZone = layout.addZone({ id: 'rooms', title: 'ROOMS', description: 'Pièces et activité par zone', type: 'rooms' });
+    const equipmentZone = layout.addZone({ id: 'equipment', title: 'EQUIPMENTS', description: 'Équipements et états généraux', type: 'equipment' });
+    const securityZone = layout.addZone({ id: 'security', title: 'SECURITY', description: 'Sécurité, alertes et présence', type: 'security' });
+    const energyZone = layout.addZone({ id: 'energy', title: 'ENERGY', description: 'Consommation, production et tendances', type: 'energy' });
+    const activityZone = layout.addZone({ id: 'activity', title: 'ACTIVITY', description: 'Événements et historique récent', type: 'activity' });
+
+    cards.slice(0, 2).forEach((card) => layout.addCard(card, homeZone.id));
+    smartCards.slice(0, 2).forEach((card) => layout.addCard(card, homeZone.id));
+    cards.slice(2, 4).forEach((card) => layout.addCard(card, equipmentZone.id));
+    smartCards.slice(2, 5).forEach((card) => layout.addCard(card, securityZone.id));
+    widgets.forEach((widget) => layout.addWidget(widget, activityZone.id));
 
     const content = document.createElement('div');
     content.className = 'panel';
-    cards.forEach((card) => content.appendChild(card));
-    widgets.forEach((widget) => content.appendChild(widget));
+    const layoutEl = layout.render();
+    content.appendChild(layoutEl);
 
     container.appendChild(headerEl);
     container.appendChild(content);
@@ -67,6 +84,7 @@ export class HomeDashboardView {
 
     this.components.cards = cards;
     this.components.widgets = widgets;
+    this.components.smartCards = smartCards;
     return container;
   }
 
@@ -145,6 +163,21 @@ export class HomeDashboardView {
    * @param {object} [summary={}] Résumé de données.
    * @returns {Array<HTMLElement>}
    */
+  buildSmartCards(summary = {}) {
+    const definitions = [
+      { id: 'lighting', type: 'LIGHTING', title: 'Carte Lumière', value: 'Structure', status: 'READY', metadata: { category: 'LIGHTING' } },
+      { id: 'climate', type: 'CLIMATE', title: 'Carte Température', value: 'Structure', status: 'READY', metadata: { category: 'CLIMATE' } },
+      { id: 'security', type: 'SECURITY', title: 'Carte Sécurité', value: 'Structure', status: 'READY', metadata: { category: 'SECURITY' } },
+      { id: 'energy', type: 'ENERGY', title: 'Carte Énergie', value: 'Structure', status: 'READY', metadata: { category: 'ENERGY' } },
+      { id: 'presence', type: 'PRESENCE', title: 'Carte Présence', value: 'Structure', status: 'READY', metadata: { category: 'PRESENCE' } },
+    ];
+
+    return definitions.map((definition) => {
+      const card = new SmartCard(definition);
+      return card.render();
+    });
+  }
+
   buildWidgets(summary = {}) {
     const widgets = [];
     const widgetDefinitions = [

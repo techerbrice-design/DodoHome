@@ -53,3 +53,34 @@
 .panel {
   padding: 20px;
 }
+.dashboard-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.dashboard-zone {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: 16px;
+}
+
+.dashboard-zone-title {
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.dashboard-zone-description {
+  margin: 0 0 12px 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.dashboard-zone-content {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}

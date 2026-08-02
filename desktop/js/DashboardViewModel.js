@@ -1,3 +1,5 @@
+import { SmartCard } from './SmartCard.js';
+
 /**
  * Modèle de vue pour transformer les données API en structure de synthèse adaptée au dashboard.
  */
@@ -49,6 +51,22 @@ export class DashboardViewModel {
         detail: 'Scènes disponibles',
       },
     ];
+
+    const smartCards = [
+      new SmartCard({ id: 'lighting', type: 'LIGHTING', title: 'Carte Lumière', value: 'Structure', status: 'READY', metadata: { category: 'LIGHTING' } }),
+      new SmartCard({ id: 'climate', type: 'CLIMATE', title: 'Carte Température', value: 'Structure', status: 'READY', metadata: { category: 'CLIMATE' } }),
+      new SmartCard({ id: 'security', type: 'SECURITY', title: 'Carte Sécurité', value: 'Structure', status: 'READY', metadata: { category: 'SECURITY' } }),
+      new SmartCard({ id: 'energy', type: 'ENERGY', title: 'Carte Énergie', value: 'Structure', status: 'READY', metadata: { category: 'ENERGY' } }),
+      new SmartCard({ id: 'presence', type: 'PRESENCE', title: 'Carte Présence', value: 'Structure', status: 'READY', metadata: { category: 'PRESENCE' } }),
+    ];
+
+    cards.push(...smartCards.map((card) => ({
+      id: card.data.id,
+      title: card.data.title,
+      value: card.data.value,
+      detail: card.data.metadata && card.data.metadata.category ? card.data.metadata.category : '',
+      type: card.data.type,
+    })));
 
     const widgets = [
       {
